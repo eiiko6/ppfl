@@ -9,14 +9,9 @@
     </div>
 
     <main v-else class="admin-grid">
-      <div v-for="(img, index) in images" :key="img.path" class="image-card">
-        <img :src="img._new ? img.path : fullUrl(img.path)" class="image" />
-
-        <input v-model="img.title" class="input-title" placeholder="Title" />
-        <textarea v-model="img.description" class="input-description" placeholder="Description"></textarea>
-
-        <button @click="deleteImage(index)" class="btn-delete">Delete</button>
-      </div>
+      <ImageCard v-for="(img, index) in images" :key="img.path" :image="img" :backend-url="backendUrl"
+        @update:title="val => img.title = val" @update:description="val => img.description = val"
+        @delete="deleteImage(index)" />
 
       <div class="upload-section">
         <label for="file-upload" class="btn-upload">Upload Images</label>
@@ -33,6 +28,7 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
+import ImageCard from './components/ImageCard.vue'
 
 const backendUrl = 'http://localhost:8080/admin'
 const loginUsername = ref('')
@@ -42,8 +38,6 @@ const loginError = ref('')
 
 const images = ref([])
 const loading = ref(false)
-
-const fullUrl = (path) => `${backendUrl.replace('/admin', '')}${path}`
 
 function getAuthHeader() {
   return {
@@ -141,52 +135,6 @@ async function applyChanges() {
   max-width: 1200px;
   margin: 15px auto 0;
   box-sizing: border-box;
-}
-
-.image-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 2px solid #ddd;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  width: 200px;
-}
-
-.image {
-  width: 100%;
-  height: 12rem;
-  object-fit: cover;
-  border-radius: 0.25rem;
-}
-
-.input-title {
-  margin-top: 0.5rem;
-  width: 100%;
-  font-weight: bold;
-  font-size: 1rem;
-  padding: 0.25rem 0.5rem;
-}
-
-.input-description {
-  margin-top: 0.25rem;
-  width: 100%;
-  resize: vertical;
-  min-height: 3rem;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.9rem;
-}
-
-.btn-delete {
-  margin-top: 0.5rem;
-  background: #f44336;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.3rem;
-  cursor: pointer;
-  width: 100%;
 }
 
 .upload-section {
