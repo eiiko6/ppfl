@@ -5,7 +5,8 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* background: linear-gradient(135deg, #4D4063, #66587F, #A678DD); */
+  background: #000000;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -59,7 +60,7 @@ button:focus-visible {
 }
 
 #app {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   margin: 0 auto;
   padding: 2rem;
   text-align: center;

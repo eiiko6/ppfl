@@ -31,9 +31,9 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 1rem;
   width: 100%;
-  max-width: 1200px;
+  max-width: 80%;
   margin: 15px auto 0;
   box-sizing: border-box;
 }
@@ -41,6 +41,12 @@ main {
 @media (min-width: 768px) {
   .image-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 1225px) {
+  .image-grid {
+    max-width: 98%;
   }
 }
 </style>
